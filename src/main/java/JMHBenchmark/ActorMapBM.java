@@ -70,79 +70,16 @@ public class ActorMapBM {
         return state.map.size();
     }
 
-//    @Benchmark
-//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    @Fork(value = 1)
-//    @Threads(value = 4)
-//    @Warmup(iterations = 2)
-//    @Measurement(iterations = 2)
-//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-//    public void putSingleValueMultiThreads(ActorMapBM.MyState state) {
-//        state.map.put(20000,20000+"",1,TimeUnit.SECONDS);
-//    }
-//
-//    @Benchmark
-//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    @Fork(value = 1)
-//    @Threads(value = 4)
-//    @Warmup(iterations = 2)
-//    @Measurement(iterations = 2)
-//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-//    public Optional<String> getSingleValueMultiThreads(ActorMapBM.MyState state) {
-//        return state.map.get(20000);
-//    }
-//
-//    @Benchmark
-//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    @Fork(value = 1)
-//    @Threads(value = 4)
-//    @Warmup(iterations = 2)
-//    @Measurement(iterations = 2)
-//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-//    public long getSingleSizeMultiThreads(ActorMapBM.MyState state) {
-//        return state.map.size();
-//    }
-
     @Benchmark
     @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Fork(value = 1)
-    @Threads(value =1)
+    @Threads(value = 4)
     @Warmup(iterations = 2)
     @Measurement(iterations = 2)
     @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-    public void putMultiValues(ActorMapBM.MyState state) {
-        for(int i =0; i<ITER_AMOUNT;i++)
-            state.map.put(i,i+"",1,TimeUnit.SECONDS);
-    }
-
-    @Benchmark
-    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    @Fork(value = 1)
-    @Threads(value =1)
-    @Warmup(iterations = 2)
-    @Measurement(iterations = 2)
-    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-    public void getMultiValues(ActorMapBM.MyState state) {
-        for(int i =0; i<ITER_AMOUNT;i++)
-            Optional.ofNullable(state.map.get(i));
-    }
-
-    @Benchmark
-    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    @Fork(value = 1)
-    @Threads(value =1)
-    @Warmup(iterations = 2)
-    @Measurement(iterations = 2)
-    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-    public void getMultiSize(ActorMapBM.MyState state) {
-        for(int i =0; i<ITER_AMOUNT;i++)
-            state.map.size();
+    public void putSingleValueMultiThreads(ActorMapBM.MyState state) {
+        state.map.put(20000,20000+"",1,TimeUnit.SECONDS);
     }
 
     @Benchmark
@@ -153,9 +90,8 @@ public class ActorMapBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 2)
     @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-    public void putMultiValuesMultiThreads(ActorMapBM.MyState state) throws InterruptedException {
-         for(int i=0; i<100;i++)
-                state.map.put(i,i+"",1,TimeUnit.SECONDS);
+    public Optional<String> getSingleValueMultiThreads(ActorMapBM.MyState state) {
+        return state.map.get(20000);
     }
 
     @Benchmark
@@ -166,10 +102,74 @@ public class ActorMapBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 2)
     @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
-    public void getMultiValuesMultiThreads(ActorMapBM.MyState state)throws InterruptedException {
-            for(int i=0; i<100;i++)
-                Optional.ofNullable(state.map.get(i));
+    public long getSingleSizeMultiThreads(ActorMapBM.MyState state) {
+        return state.map.size();
     }
+
+//    @Benchmark
+//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @Fork(value = 1)
+//    @Threads(value =1)
+//    @Warmup(iterations = 2)
+//    @Measurement(iterations = 2)
+//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
+//    public void putMultiValues(ActorMapBM.MyState state) {
+//        for(int i =0; i<ITER_AMOUNT;i++)
+//            state.map.put(i,i+"",1,TimeUnit.SECONDS);
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @Fork(value = 1)
+//    @Threads(value =1)
+//    @Warmup(iterations = 2)
+//    @Measurement(iterations = 2)
+//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
+//    public void getMultiValues(ActorMapBM.MyState state) {
+//        for(int i =0; i<ITER_AMOUNT;i++)
+//            Optional.ofNullable(state.map.get(i));
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @Fork(value = 1)
+//    @Threads(value =1)
+//    @Warmup(iterations = 2)
+//    @Measurement(iterations = 2)
+//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
+//    public void getMultiSize(ActorMapBM.MyState state) {
+//        for(int i =0; i<ITER_AMOUNT;i++)
+//            state.map.size();
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @Fork(value = 1)
+//    @Threads(value = 4)
+//    @Warmup(iterations = 2)
+//    @Measurement(iterations = 2)
+//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
+//    public void putMultiValuesMultiThreads(ActorMapBM.MyState state) throws InterruptedException {
+//         for(int i=0; i<100;i++)
+//                state.map.put(i,i+"",1,TimeUnit.SECONDS);
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode({Mode.Throughput,Mode.SampleTime,Mode.AverageTime})
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @Fork(value = 1)
+//    @Threads(value = 4)
+//    @Warmup(iterations = 2)
+//    @Measurement(iterations = 2)
+//    @Timeout(time = 20, timeUnit = TimeUnit.SECONDS)
+//    public void getMultiValuesMultiThreads(ActorMapBM.MyState state)throws InterruptedException {
+//            for(int i=0; i<100;i++)
+//                Optional.ofNullable(state.map.get(i));
+//    }
 
     public static void main(String ...args) throws IOException, RunnerException {
         org.openjdk.jmh.Main.main(args);
