@@ -19,7 +19,7 @@ import static akka.pattern.Patterns.ask;
 public class ActorTimedHaspMap<K,V> implements MapInterface.TimedSizableMap<K,V>{
 
     private final ActorSystem system = ActorSystem.create("ActorSystem");
-    private final Props p = Props.create(ActorMap.class,() -> new ActorMap<K,V>());
+    private final Props p = Props.create(ActorMap.class, ActorMap::new);
     private final ActorRef actorMap = system.actorOf(p, "theMap");
 
     @Override
@@ -39,7 +39,7 @@ public class ActorTimedHaspMap<K,V> implements MapInterface.TimedSizableMap<K,V>
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable(null);
+        return Optional.empty();
     }
 
     @Override
